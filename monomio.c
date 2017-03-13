@@ -36,9 +36,11 @@ Monomio* CreateMonomio(double coeficient, MonomioVariables* addMonomioVariable)
 {
     Monomio* monomio = CreateConstant(coeficient);
     monomio->Variables = addMonomioVariable;
+    return monomio;
 }
 
 Monomio* MonomioAddVariable(Monomio* monomio, MonomioVariable* variable)
 {
     monomio->Variables = addMonomioVariable(monomio->Variables, variable);
+    return monomio;
 }
