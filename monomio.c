@@ -1,7 +1,7 @@
 #include "monomio.h"
 #include <stdlib.h>
 
-MonomioVariable* CreateMonomioVariable(char variable, int expoente)
+MonomioVariable* createMonomioVariable(char variable, int expoente)
 {
     MonomioVariable* monomioVariable = malloc(sizeof(MonomioVariable));
     monomioVariable->Variable = variable;
@@ -11,36 +11,53 @@ MonomioVariable* CreateMonomioVariable(char variable, int expoente)
 
 MonomioVariables* createVariableList(MonomioVariable* monomioVariable)
 {
-    MonomioVariables* variableList = malloc(sizeof(MonomioVariable));
-    variableList->Value = monomioVariable;
-    variableList->Next = NULL;
+    return createList(monomioVariable);
+}
+
+MonomioVariables* addMonomioVariable(MonomioVariables* monomioVariable, MonomioVariable* toPrepend)
+{
+    MonomioVariables* variableList = createVariableList(toPrepend);
+    variableList->next = monomioVariable;
     return variableList;
 }
 
-MonomioVariable* addMonomioVariable(MonomioVariables* monomioVariable, MonomioVariable* toPrepend)
+int monomioVariablesEquals(MonomioVariables * monomioVariables1, MonomioVariables * monomioVariables2)
 {
-    MonomioVariable* variableList = createVariableList(toPrepend);
-    variableList->Next = monomioVariable;
-    return variableList;
+	//TO DO
+	return 0;
 }
 
-Monomio* CreateConstant(double constant)
+Monomio * createEmptyMonomio()
 {
-    Monomio* monomio = malloc(sizeof(Monomio));
-    monomio->Coeficiente = constant;
-    monomio->Variables = NULL;
+	Monomio* monomio = malloc(sizeof(Monomio));
+	monomio->isPositive = 0;
+	monomio->coeficient = 0;
+	monomio->variables = NULL;
+	return monomio;
+}
+
+Monomio* createConstant(double constant)
+{
+    Monomio* monomio = createEmptyMonomio();
+	monomio->isPositive = constant >= 0;
+    monomio->coeficient = constant;
     return monomio;
 }
 
-Monomio* CreateMonomio(double coeficient, MonomioVariables* addMonomioVariable)
+Monomio* createMonomio(double coeficient, MonomioVariables* addMonomioVariable)
 {
-    Monomio* monomio = CreateConstant(coeficient);
-    monomio->Variables = addMonomioVariable;
+    Monomio* monomio = createConstant(coeficient);
+    monomio->variables = addMonomioVariable;
     return monomio;
 }
 
-Monomio* MonomioAddVariable(Monomio* monomio, MonomioVariable* variable)
+Monomio* monomioAddVariable(Monomio* monomio, MonomioVariable* variable)
 {
-    monomio->Variables = addMonomioVariable(monomio->Variables, variable);
+    monomio->variables = addMonomioVariable(monomio->variables, variable);
     return monomio;
+}
+
+int monomioCanSum(Monomio * monomio1, Monomio * monomio2)
+{
+	return monomioVariablesEquals(monomio1->variables, monomio2->variables);
 }

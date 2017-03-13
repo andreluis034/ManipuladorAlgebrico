@@ -1,3 +1,4 @@
+#pragma once
 #include "list.h"
 typedef struct _monomioVariable
 {
@@ -9,14 +10,18 @@ typedef List MonomioVariables;
 
 typedef struct _monomio
 {
-	double Coeficient;
-    MonomioVariables Variables;
+	unsigned char isPositive;
+	double coeficient;
+    MonomioVariables* variables;
 } Monomio;
 
-MonomioVariable* CreateMonomioVariable(char variable, int expoente);
+MonomioVariable* createMonomioVariable(char variable, int expoente);
 MonomioVariables* createVariableList(MonomioVariable* monomioVariable);
-MonomioVariable* addMonomioVariable(MonomioVariables* monomioVariable, MonomioVariable* VariablePrep);
+MonomioVariables* addMonomioVariable(MonomioVariables* monomioVariable, MonomioVariable* VariablePrep);
+int monomioVariablesEquals(MonomioVariables* monomioVariables1, MonomioVariables* monomioVariables2);
 
-Monomio* CreateConstant(double constant);
-Monomio* CreateMonomio(double coeficient, MonomioVariables* addMonomioVariable);
-Monomio* MonomioAddVariable(Monomio* monomio, MonomioVariable* variable);
+Monomio* createEmptyMonomio();
+Monomio* createConstant(double constant);
+Monomio* createMonomio(double coeficient, MonomioVariables* addMonomioVariable);
+Monomio* monomioAddVariable(Monomio* monomio, MonomioVariable* variable);
+int monomioCanSum(Monomio* monomio1, Monomio* monomio2);
