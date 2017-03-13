@@ -1,8 +1,11 @@
+#pragma once
 typedef struct _list
 {
-    void* Value;
-    struct _list* Next;
+    void* value;
+    struct _list* next;
 } List;
 
-
-void deleteList(Node** node);
+List* createList(void* data);
+List* createEmptyList();
+void deleteList(List** node);
+List* prependList(List* list, void* data);
