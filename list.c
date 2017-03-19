@@ -3,6 +3,10 @@
 
 List* createList(void* data)
 {
+	if(data == NULL){
+		return NULL;
+	}
+
 	List* list = malloc(sizeof(List));
 	list->value = data;
 	list->next = NULL;
