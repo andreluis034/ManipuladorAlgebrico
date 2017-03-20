@@ -10,7 +10,6 @@ typedef List MonomioVariables;
 
 typedef struct _monomio
 {
-	unsigned char isPositive;
 	double coeficient;
 	int isNormalized;
     MonomioVariables* variables;

@@ -162,6 +162,7 @@ void printPolinomio(Polinomio * polinomio1)
 				Monomio * temp = (Monomio *)polinomio1->value;
 
 				if(temp->coeficient == 0){
+					polinomio1 = polinomio1->next;
 					continue;
 				}
 

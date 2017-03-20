@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include "menu.h"
+#include "parser.h"
 
 void cleanScreen(){
 
@@ -44,7 +45,10 @@ void adicionarPolinomios(){
 	//printf("adicionarPolinomios()\n");
 
 	printf("Lendo do standard input o polinomio 1...\n");
-
+	printf("%d\n", getchar());
+	Polinomio* poly_um = parseInput();
+	printPolinomio(poly_um);
+		/*
 		//Scanner from poly 1 goes here
 		MonomioVariable *var_1 = createMonomioVariable('x',2);
 		MonomioVariable *var_2 = createMonomioVariable('z',1);
@@ -55,10 +59,11 @@ void adicionarPolinomios(){
 		variaveis = addMonomioVariable(variaveis,var_3);
 
 		Monomio *mono_um = createMonomio(10,variaveis);
-		Polinomio *poly_um = createPolinomio(mono_um);
+		Polinomio *poly_um = createPolinomio(mono_um);*/
 
 	printf("Lendo do standard input o polinomio 2...\n");
-
+	Polinomio* poly_dois = parseInput();
+	/*
 		//Scanner from poly 2 goes here
 		MonomioVariable *var_4 = createMonomioVariable('x',6);
 		MonomioVariable *var_5 = createMonomioVariable('y',1);
@@ -70,7 +75,7 @@ void adicionarPolinomios(){
 
 		Monomio *mono_dois = createMonomio(2,variaveis2);
 		Polinomio *poly_dois = createPolinomio(mono_dois);
-
+*/
 	printf("Adicionando polinomios...\n");
 	printf("Resultado: ");
 	printPolinomio(addPolinomios(poly_um,poly_dois));
@@ -83,7 +88,10 @@ void calcularDerivada(){
 	//printf("calcularDerivada()\n");
 
 	printf("Lendo do standard input o polinomio...\n");
+	printf("%d\n", getchar());
 
+	Polinomio* poly_um = normalizePolinomio(parseInput());
+	/*
 		//Scanner from poly goes here
 		MonomioVariable *var_1 = createMonomioVariable('x',2);
 		MonomioVariable *var_2 = createMonomioVariable('z',1);
@@ -94,10 +102,9 @@ void calcularDerivada(){
 		variaveis = addMonomioVariable(variaveis,var_3);
 
 		Monomio *mono_um = createMonomio(10,variaveis);
-		Polinomio *poly_um = createPolinomio(mono_um);
+		Polinomio *poly_um = createPolinomio(mono_um);*/
 
 	printf("Deseja derivar em ordem a que variavel? ");
-	ordem = getchar(); //consumir \n
 	scanf("%c",&ordem);
 
 	printf("\nDerivando polinomio...\n");
@@ -113,7 +120,11 @@ void calcularIntegral(){
 	//printf("calcularIntegral()\n");
 
 	printf("Lendo do standard input o polinomio...\n");
+	printf("%d\n", getchar());
 
+	Polinomio* poly_um = normalizePolinomio(parseInput());
+	printPolinomio(poly_um);
+/*
 		//Scanner from poly goes here
 		MonomioVariable *var_1 = createMonomioVariable('x',2);
 		MonomioVariable *var_2 = createMonomioVariable('z',1);
@@ -125,9 +136,9 @@ void calcularIntegral(){
 
 		Monomio *mono_um = createMonomio(10,variaveis);
 		Polinomio *poly_um = createPolinomio(mono_um);
-
+*/
 	printf("Deseja integrar em ordem a que variavel? ");
-	ordem = getchar(); //consumir \n
+	//ordem = getchar(); //consumir \n
 	scanf("%c",&ordem);
 
 	printf("\nIntegrando polinomio...\n");

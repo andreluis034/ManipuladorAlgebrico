@@ -116,7 +116,6 @@ void printVariables(MonomioVariables * monomioVariables1)
 Monomio * createEmptyMonomio()
 {
 	Monomio* monomio = malloc(sizeof(Monomio));
-	monomio->isPositive = 0;
 	monomio->coeficient = 0;
     monomio->isNormalized = 0;
 	monomio->variables = NULL;
@@ -126,7 +125,6 @@ Monomio * createEmptyMonomio()
 Monomio* createConstant(double constant)
 {
     Monomio* monomio = createEmptyMonomio();
-	monomio->isPositive = constant >= 0;
     monomio->coeficient = constant;
     monomio->isNormalized = 0;
     return monomio;
