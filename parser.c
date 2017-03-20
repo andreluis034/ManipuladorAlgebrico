@@ -68,7 +68,6 @@ Polinomio* parseInput()
 	free(input);
 	return pol;
 }
-#define N 100
 Monomio* parseOne(char* input, int forceSinal, char **rest, int* success)
 {
 	int n = strlen(input);
@@ -76,16 +75,16 @@ Monomio* parseOne(char* input, int forceSinal, char **rest, int* success)
 	int isPositive = 0;
 	*success = 0;
 
-	char coeficiente[N]; 
+	char coeficiente[n]; 
 	bzero(coeficiente, n);
 	coeficiente[0] = '0'; //For compatbility with .5
 	int coeficientePos = 1;
 
-	char variavel[N]; 
+	char variavel[n]; 
 	bzero(variavel, n);
 	int variavelPos = 0;
 
-	char expoente[N]; 
+	char expoente[n]; 
 	bzero(expoente, n);
 	int expoentePos = 0;
 
