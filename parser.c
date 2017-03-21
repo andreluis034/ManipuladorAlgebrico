@@ -109,7 +109,10 @@ Monomio* parseOne(char* input, int forceSinal, char **rest, int* success)
 					if(digitBegins(input[i]))
 						stage = CoeficienteUnitario;
 					else
+					{
+						monomio = createConstant(1);
 						stage = Variavel;
+					}
 					--i;
 					isPositive = 1;
 					break;
@@ -119,7 +122,10 @@ Monomio* parseOne(char* input, int forceSinal, char **rest, int* success)
 				if (digitBegins(input[i+1]))
 					stage = CoeficienteUnitario;
 				else
-					stage = Variavel;
+				{
+						monomio = createConstant(isPositive ? 1 : -1);
+						stage = Variavel;
+				}
 				break;
 			case CoeficienteUnitario:
 				if (input[i] == '.')
