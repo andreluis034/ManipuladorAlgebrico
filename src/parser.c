@@ -82,13 +82,11 @@ Monomio* parseOne(char* input, int forceSinal, char **rest, int* success)
 
 	char variavel[n]; 
 	bzero(variavel, n);
-	int variavelPos = 0;
 
 	char expoente[n]; 
 	bzero(expoente, n);
 	int expoentePos = 0;
 
-	MonomioVariables* s = NULL;
 	Monomio* monomio = NULL;
 
 	ReadStage stage = Sinal;
@@ -104,7 +102,7 @@ Monomio* parseOne(char* input, int forceSinal, char **rest, int* success)
 					if(forceSinal)
 					{
 						ERROR_EXPECTED("operator + or -");
-						return;
+						return NULL;
 					}
 					if(digitBegins(input[i]))
 						stage = CoeficienteUnitario;
@@ -138,7 +136,7 @@ Monomio* parseOne(char* input, int forceSinal, char **rest, int* success)
 				if (!isdigit(input[i]))
 				{
 					ERROR_EXPECTED("digit");
-					return;
+					return NULL;
 				}
 				coeficiente[coeficientePos++] = input[i];
 				if (!isdigit(input[i + 1]) && input[i + 1] != '.' )
@@ -173,7 +171,7 @@ Monomio* parseOne(char* input, int forceSinal, char **rest, int* success)
 				if(input[i] != '^')
 				{
 					ERROR_EXPECTED("operador ^");
-					return;
+					return NULL;
 				}
 				bzero(expoente, n);
 				expoentePos = 0;
@@ -183,7 +181,7 @@ Monomio* parseOne(char* input, int forceSinal, char **rest, int* success)
 				if(!isdigit(input[i]))
 				{
 					ERROR_EXPECTED("digit");
-					return;
+					return NULL;
 				}
 				expoente[expoentePos++] = input[i];
 				if(!isdigit(input[i+1]))
@@ -195,6 +193,8 @@ Monomio* parseOne(char* input, int forceSinal, char **rest, int* success)
 					else
 						stage = Fim;
 				}
+				break;
+			case Fim:
 				break;
 		}
 	}
