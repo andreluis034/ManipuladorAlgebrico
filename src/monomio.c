@@ -104,10 +104,10 @@ void printVariables(MonomioVariables * monomioVariables1)
     while(monomioVariables1){
         MonomioVariable * temp = (MonomioVariable*)monomioVariables1->value;
         if(temp->Expoente == 1){
-            printf("(%c)",temp->Variable);
+            printf("%c",temp->Variable);
         }
         else{
-            printf("(%c^%d)",temp->Variable,temp->Expoente);
+            printf("%c^%d",temp->Variable,temp->Expoente);
         }
         monomioVariables1 = monomioVariables1->next;
     }

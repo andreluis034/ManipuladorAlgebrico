@@ -169,14 +169,9 @@ void printPolinomio(Polinomio * polinomio1)
 {
 
 	if (isNull(polinomio1)) {
-		printf("0\n");
+		printf("0.0\n");
 		return;
 	}
-
-	if(polinomio1 == NULL){
-		printf("(*Polinomio Vazio*)\n");
-		return;
-	} 
 
 	while(polinomio1!=NULL){
 
