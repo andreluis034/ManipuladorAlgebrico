@@ -75,16 +75,21 @@ Monomio* parseOne(char* input, int forceSinal, char **rest, int* success)
 	int isPositive = 0;
 	*success = 0;
 
-	char coeficiente[n]; 
+#ifdef __WINDOWS__ //Nao permite a inicializacao de arrays de tamanho arbitrario
+	char coeficiente[200]; 
+	char variavel[200];
+	char expoente[200];
+#else
+	char coeficiente[n];
+	char variavel[n];
+	char expoente[n];
+#endif
+
 	bzero(coeficiente, n);
+	bzero(variavel, n);
+	bzero(expoente, n);
 	coeficiente[0] = '0'; //For compatbility with .5
 	int coeficientePos = 1;
-
-	char variavel[n]; 
-	bzero(variavel, n);
-
-	char expoente[n]; 
-	bzero(expoente, n);
 	int expoentePos = 0;
 
 	Monomio* monomio = NULL;
@@ -160,6 +165,8 @@ Monomio* parseOne(char* input, int forceSinal, char **rest, int* success)
 				}
 				else if(isalpha(input[i + 1])) // new variavel
 				{
+					MonomioVariable* var = createMonomioVariable(variavel[0], 1);
+					monomio = monomioAddVariable(monomio, var);
 					stage = Variavel;
 				}
 				else
