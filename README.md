@@ -4,7 +4,10 @@ A simple algebric manipulator that sums, derivates or integrates polynomials.
 
 ## Getting Started
 
-Clone the project into a local folder: git clone https://github.com/andreluis034/ManipuladorAlgebrico.git
+Clone the project into a local folder: 
+```bash
+git clone https://github.com/andreluis034/ManipuladorAlgebrico.git
+```
 Change into the created folder and build the project using: make
 
 ### Prerequisites
@@ -14,7 +17,7 @@ To build the project you must have the following packaged installed:
 * GNU Make
     
 On Debian and Debian based distributions installing the build-essential package will suffice:
-```
+```bash
 apt-get install build-essential
 ```
 
@@ -24,7 +27,7 @@ After cloning the repository and installing the prerequisites:
 
 Build the project using make
 
-```
+```bash
 make algebra.out
 ```
 
