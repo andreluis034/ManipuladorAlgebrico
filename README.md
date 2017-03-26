@@ -28,10 +28,27 @@ Build the project using make
 make algebra.out
 ```
 
-Since this is a small project it shouldn't take long.
+Since this is a small project it shouldn't take long to build it.
 After it has been built the project binary, algebra.out, will be in the project root folder.
 
-End with an example of getting some data out of the system or using it for a little demo
+
+### Examples
+
+When asked for a polynomial it should come from standard input with the following regular expression:
+```
+([\+\-]?([0-9]*[\.]?)[0-9]*[A-Za-z]*([\^][0-9]+)?)*
+```
+This expression does not take into account the spaces from input as these are ignored when reading the input.
+
+Although multiple variables are supported in a "monomial" you should not repeat the same variable twice.
+
+Here are some examples of valid inputs:
+* 5x^3254
+* 532xyz^3254 + 6xy^23 - .5
+* 5.65x^3254
+* .62548
+
+
 
 ## Built With
 
