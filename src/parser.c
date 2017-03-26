@@ -4,7 +4,7 @@
 #include <string.h>
 #include <ctype.h>
 #define INITIAL_SIZE 100
-#define bzero(a, b) memset(a,0,b)
+
 #define ERROR_EXPECTED(a) fprintf(stderr, "Expected %s in position %d got '%c' instead.\n",a, i, input[i])
 
 int isContained(char c, char* string)
@@ -77,17 +77,16 @@ Monomio* parseOne(char* input, int forceSinal, char **rest, int* success)
 
 #ifdef __WINDOWS__ //Nao permite a inicializacao de arrays de tamanho arbitrario
 	char coeficiente[200]; 
-	char variavel[200];
 	char expoente[200];
 #else
 	char coeficiente[n];
-	char variavel[n];
 	char expoente[n];
 #endif
+	char variavel;
 
-	bzero(coeficiente, n);
-	bzero(variavel, n);
-	bzero(expoente, n);
+	memset(coeficiente, 0, n);
+	memset(expoente, 0, n);
+
 	coeficiente[0] = '0'; //For compatbility with .5
 	int coeficientePos = 1;
 	int expoentePos = 0;
@@ -156,16 +155,16 @@ Monomio* parseOne(char* input, int forceSinal, char **rest, int* success)
 				}
 				break;
 			case Variavel:
-				variavel[0] = input[i];
+				variavel = input[i];
 				if(MonomioEnds(input[i + 1]))
 				{
-					MonomioVariable* var = createMonomioVariable(variavel[0], 1);
+					MonomioVariable* var = createMonomioVariable(variavel, 1);
 					monomio = monomioAddVariable(monomio, var);
 					stage = Fim;
 				}
 				else if(isalpha(input[i + 1])) // new variavel
 				{
-					MonomioVariable* var = createMonomioVariable(variavel[0], 1);
+					MonomioVariable* var = createMonomioVariable(variavel, 1);
 					monomio = monomioAddVariable(monomio, var);
 					stage = Variavel;
 				}
@@ -193,7 +192,7 @@ Monomio* parseOne(char* input, int forceSinal, char **rest, int* success)
 				expoente[expoentePos++] = input[i];
 				if(!isdigit(input[i+1]))
 				{
-					MonomioVariable* var = createMonomioVariable(variavel[0], atoi(expoente));
+					MonomioVariable* var = createMonomioVariable(variavel, atoi(expoente));
 					monomio = monomioAddVariable(monomio, var);
 					if(isalpha(input[i+1]))
 						stage = Variavel;
