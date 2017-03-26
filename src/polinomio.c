@@ -149,8 +149,29 @@ Polinomio * integratePolinomio(Polinomio * polinomio1, char ordem){
 	return integral;
 }
 
+int isNull(Polinomio * polinomio1) {
+
+	while (polinomio1 != NULL) {
+		Monomio * temp = (Monomio *)polinomio1->value;
+
+		if (temp->coeficient != 0) {
+			return 0;
+		}
+
+		polinomio1 = polinomio1->next;
+	}
+
+	return 1;
+
+}
+
 void printPolinomio(Polinomio * polinomio1)
 {
+
+	if (isNull(polinomio1)) {
+		printf("0\n");
+		return;
+	}
 
 	if(polinomio1 == NULL){
 		printf("(*Polinomio Vazio*)\n");

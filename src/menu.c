@@ -4,11 +4,14 @@
 
 void cleanScreen(){
 
-	//For linux:
-	//printf("\033[H\033[J");
-
-	//Windows lame debug mode:
+#ifdef __WINDOWS__
+	//Windows lame mode:
 	printf("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
+#else
+	printf("\033[H\033[J");
+#endif
+
+
 }
 
 void printOptions(){
@@ -23,17 +26,15 @@ void printPrompt(){
 }
 
 int askAgain(){
-	char c = getchar(); //consumir \n anterior
-	printf("Deseja voltar ao menu? <y/n> ");
-	scanf("%c",&c);
+	char c;
+	printf("\n\nDeseja voltar ao menu? <y/n> ");
+	scanf("%c",&c); getchar(); //consumir \n
 
 	switch(c){
 		case 'y':
 		return 1;
-		break;
 		case 'n':
 		return 0;
-		break;
 		default:
 		return askAgain();
 	}
@@ -42,42 +43,24 @@ int askAgain(){
 
 void adicionarPolinomios(){
 
-	//printf("adicionarPolinomios()\n");
-
-	printf("Lendo do standard input o polinomio 1...\n");
-	printf("%d\n", getchar());
+	printf("Introduza o primeiro polinomio: \n");
 	Polinomio* poly_um = parseInput();
+	if (poly_um == NULL)	//Parse do polinomio falhou
+		return;
+#ifdef DEBUG
 	printPolinomio(poly_um);
-		/*
-		//Scanner from poly 1 goes here
-		MonomioVariable *var_1 = createMonomioVariable('x',2);
-		MonomioVariable *var_2 = createMonomioVariable('z',1);
-		MonomioVariable *var_3 = createMonomioVariable('y',3);
+#endif
 
-		MonomioVariables *variaveis = createVariableList(var_1);
-		variaveis = addMonomioVariable(variaveis,var_2);
-		variaveis = addMonomioVariable(variaveis,var_3);
-
-		Monomio *mono_um = createMonomio(10,variaveis);
-		Polinomio *poly_um = createPolinomio(mono_um);*/
-
-	printf("Lendo do standard input o polinomio 2...\n");
+	printf("Introduza o segundo polinomio \n");
 	Polinomio* poly_dois = parseInput();
-	/*
-		//Scanner from poly 2 goes here
-		MonomioVariable *var_4 = createMonomioVariable('x',6);
-		MonomioVariable *var_5 = createMonomioVariable('y',1);
-		MonomioVariable *var_6 = createMonomioVariable('z',4);
+	if (poly_dois == NULL)	//Parse do polinomio falhou
+		return;
+#ifdef DEBUG
+	printPolinomio(poly_dois);
+#endif
 
-		MonomioVariables *variaveis2 = createVariableList(var_4);
-		variaveis2 = addMonomioVariable(variaveis2,var_5);
-		variaveis2 = addMonomioVariable(variaveis2,var_6);
-
-		Monomio *mono_dois = createMonomio(2,variaveis2);
-		Polinomio *poly_dois = createPolinomio(mono_dois);
-*/
 	printf("Adicionando polinomios...\n");
-	printf("Resultado: ");
+	printf("Resultado: \n");
 	printPolinomio(addPolinomios(poly_um,poly_dois));
 }
 
@@ -85,27 +68,19 @@ void calcularDerivada(){
 
 	char ordem;
 
-	//printf("calcularDerivada()\n");
+	printf("Introduza o polinomio: \n");
 
-	printf("Lendo do standard input o polinomio...\n");
-	printf("%d\n", getchar());
+	Polinomio* poly_um = parseInput();
+	if (poly_um == NULL)	//Parse do polinomio falhou
+		return;
+	poly_um = normalizePolinomio(poly_um);
 
-	Polinomio* poly_um = normalizePolinomio(parseInput());
-	/*
-		//Scanner from poly goes here
-		MonomioVariable *var_1 = createMonomioVariable('x',2);
-		MonomioVariable *var_2 = createMonomioVariable('z',1);
-		MonomioVariable *var_3 = createMonomioVariable('y',3);
-
-		MonomioVariables *variaveis = createVariableList(var_1);
-		variaveis = addMonomioVariable(variaveis,var_2);
-		variaveis = addMonomioVariable(variaveis,var_3);
-
-		Monomio *mono_um = createMonomio(10,variaveis);
-		Polinomio *poly_um = createPolinomio(mono_um);*/
+#ifdef DEBUG
+	printPolinomio(poly_um);
+#endif
 
 	printf("Deseja derivar em ordem a que variavel? ");
-	scanf("%c",&ordem);
+	scanf("%c",&ordem); getchar(); //consumir \n
 
 	printf("\nDerivando polinomio...\n");
 	printf("Resultado: \n");
@@ -117,29 +92,19 @@ void calcularIntegral(){
 
 	char ordem;
 
-	//printf("calcularIntegral()\n");
+	printf("Introduza o polinomio: \n");
 
-	printf("Lendo do standard input o polinomio...\n");
-	printf("%d\n", getchar());
+	Polinomio* poly_um = parseInput();
+	if (poly_um == NULL)	//Parse do polinomio falhou
+		return;
+	poly_um = normalizePolinomio(poly_um);
 
-	Polinomio* poly_um = normalizePolinomio(parseInput());
+#ifdef DEBUG
 	printPolinomio(poly_um);
-/*
-		//Scanner from poly goes here
-		MonomioVariable *var_1 = createMonomioVariable('x',2);
-		MonomioVariable *var_2 = createMonomioVariable('z',1);
-		MonomioVariable *var_3 = createMonomioVariable('y',3);
+#endif
 
-		MonomioVariables *variaveis = createVariableList(var_1);
-		variaveis = addMonomioVariable(variaveis,var_2);
-		variaveis = addMonomioVariable(variaveis,var_3);
-
-		Monomio *mono_um = createMonomio(10,variaveis);
-		Polinomio *poly_um = createPolinomio(mono_um);
-*/
 	printf("Deseja integrar em ordem a que variavel? ");
-	//ordem = getchar(); //consumir \n
-	scanf("%c",&ordem);
+	scanf("%c",&ordem); getchar(); //consumir \n
 
 	printf("\nIntegrando polinomio...\n");
 	printf("Resultado: \n");
@@ -156,11 +121,11 @@ void menu(){
 	printOptions();
 
 	printPrompt();
-	scanf("%d",&c);
+	scanf("%d",&c); getchar(); //consumir \n
 
 	while(c<1 || c>3){
 		printPrompt();
-		scanf("%d",&c);
+		scanf("%d",&c); getchar(); //consumir \n
 	}
 
 	switch(c){
