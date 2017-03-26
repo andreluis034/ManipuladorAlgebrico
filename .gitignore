@@ -46,6 +46,7 @@ Network Trash Folder
 Temporary Items
 .apdisk
 .vscode/c_cpp_properties.json
-a.exe
+bin/
+obj/
 *.log
 *.out
